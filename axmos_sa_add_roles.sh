@@ -1,5 +1,5 @@
 export SA_NAME=axmos-assessment-sa;
-export PROJECT_ID=axmos-internal-tools;
+export PROJECT_ID=;
 
 gcloud iam service-accounts create $SA_NAME --description="Axmos Triforce - Service Account" --display-name="Axmos Triforce - Service Account" --project=$PROJECT_ID
 
@@ -50,14 +50,21 @@ AXMOS_SA_ROLES=(
 'roles/run.admin' \
 'roles/iam.serviceAccountUser' \
 'roles/artifactregistry.writer' \
-'roles/monitoring.viewer'
+'roles/monitoring.viewer' \
+'roles/bigquery.jobUser' \
+'roles/bigquery.dataOwner' \
+'roles/bigquery.user' 
 )
 
 for role in "${AXMOS_SA_ROLES[@]}"
 do
   echo "Assigning $role... to $SA_NAME";
   gcloud organizations add-iam-policy-binding ${ORG_ID} \
-    --member=serviceAccount:"$SA_NAME@axmos-internal-tools.iam.gserviceaccount.com" \
+    --member=serviceAccount:"$SA_NAME@$PROJECT_ID.iam.gserviceaccount.com" \
     --role="$role" \
     --no-user-output-enabled --quiet;
 done
+
+gcloud iam service-accounts keys create ~/sa.json \
+  --iam-account "$SA_NAME@$PROJECT_ID.iam.gserviceaccount.com"
+
