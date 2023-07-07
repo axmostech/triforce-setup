@@ -1,13 +1,15 @@
-export SA_NAME=axmos-assessment-sa;
-export PROJECT_ID=;
-
-gcloud iam service-accounts create $SA_NAME --description="Axmos Triforce - Service Account" --display-name="Axmos Triforce - Service Account" --project=$PROJECT_ID
+export SA_NAME=organization-scanner@axmos-triforce-assessment.iam.gserviceaccount.com;
+export PROJECT_ID=$1;
 
 ORG_ID="$(gcloud projects get-ancestors $PROJECT_ID --format=json | jq -r '.[]|select(.type | startswith("org"))|.id')"
+
+echo "==========================================================================================="
+echo ""
+echo "IMPORTANT: Please copy this Organization ID and send it to AXIOS throw the Enrollment Form"
+echo ""
 echo "Org Id: "$ORG_ID;
-
-
-
+echo ""
+echo "==========================================================================================="
 
 AXMOS_SA_ROLES=(
 'roles/appengine.appViewer' \
@@ -54,7 +56,7 @@ for role in "${AXMOS_SA_ROLES[@]}"
 do
   echo "Assigning $role... to $SA_NAME at the organization";
   gcloud organizations add-iam-policy-binding ${ORG_ID} \
-    --member=serviceAccount:"$SA_NAME@$PROJECT_ID.iam.gserviceaccount.com" \
+    --member=serviceAccount:"$SA_NAME" \
     --role="$role" \
     --no-user-output-enabled --quiet;
 done
@@ -72,16 +74,11 @@ for role in "${ON_PROJECT_PERMISIONS[@]}"
 do
   echo "Assigning $role... to $SA_NAME int the project";
 
-  gcloud iam service-accounts add-iam-policy-binding $SA_NAME@$PROJECT_ID.iam.gserviceaccount.com \
+  gcloud iam service-accounts add-iam-policy-binding $SA_NAME \
     --member=serviceAccount:"$SA_NAME@$PROJECT_ID.iam.gserviceaccount.com" \
     --role="$role" \
     --no-user-output-enabled --quiet;
 done
 
 
-echo "Trying to download service account key .json";
-gcloud iam service-accounts keys create ~/sa.json \
-  --iam-account "$SA_NAME@$PROJECT_ID.iam.gserviceaccount.com"
-
-echo "If it fails please download it manually in the IAM secction of $PROJECT_ID project.";
-
+echo "Process finished"
