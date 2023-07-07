@@ -45,7 +45,7 @@ AXMOS_SA_ROLES=(
 'roles/serviceusage.serviceUsageConsumer' \
 'roles/iam.serviceAccountUser' \
 'roles/artifactregistry.writer' \
-'roles/monitoring.viewer' \ 
+'roles/monitoring.viewer' \
 'roles/bigquery.metadataViewer' \
 'roles/serviceusage.serviceUsageAdmin' \
 'roles/containerregistry.ServiceAgent' \
