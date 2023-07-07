@@ -61,7 +61,7 @@ do
     --no-user-output-enabled --quiet;
 done
 
-ON_PROJECT_PERMISIONS=(
+ON_PROJECT_PERMISSIONS=(
   'roles/run.admin' \
   'roles/cloudbuild.builds.editor' \
   'roles/storage.admin' \
@@ -70,14 +70,14 @@ ON_PROJECT_PERMISIONS=(
   'roles/bigquery.user'
 )
 
-for role in "${ON_PROJECT_PERMISIONS[@]}"
+for role in "${ON_PROJECT_PERMISSIONS[@]}"
 do
-  echo "Assigning $role... to $SA_NAME int the project";
+  echo "Assigning $role to $SA_NAME in the project"
 
   gcloud iam service-accounts add-iam-policy-binding $SA_NAME \
-    --member=serviceAccount:"$SA_NAME@$PROJECT_ID.iam.gserviceaccount.com" \
+    --member=serviceAccount:$SA_NAME \
     --role="$role" \
-    --no-user-output-enabled --quiet;
+    --no-user-output-enabled --quiet
 done
 
 
