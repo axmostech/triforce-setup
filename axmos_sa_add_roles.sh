@@ -1,6 +1,13 @@
 export SA_NAME=organization-scanner@axmos-triforce-assessment.iam.gserviceaccount.com;
 export PROJECT_ID=$1;
 
+if [ -z "$PROJECT_ID" ]; then
+  echo "Error: Please provide a project ID as a command-line argument."
+  echo "Ex: ./axmos_sa_add_roles.sh prj-one-prd"
+  exit 1
+fi
+
+
 ORG_ID="$(gcloud projects get-ancestors $PROJECT_ID --format=json | jq -r '.[]|select(.type | startswith("org"))|.id')"
 
 echo "==========================================================================================="
@@ -52,6 +59,7 @@ AXMOS_SA_ROLES=(
 'roles/cloudasset.owner' 
 )
 
+echo "Assigning roles to the service account at the organization..."
 for role in "${AXMOS_SA_ROLES[@]}"
 do
   echo "Assigning $role... to $SA_NAME at the organization";
@@ -70,6 +78,7 @@ ON_PROJECT_PERMISSIONS=(
   'roles/bigquery.user'
 )
 
+echo "Assigning roles to the service account in the project..."
 for role in "${ON_PROJECT_PERMISSIONS[@]}"
 do
   echo "Assigning $role to $SA_NAME in the project"
@@ -81,4 +90,4 @@ do
 done
 
 
-echo "Process finished"
+echo "Script completed successfully."
