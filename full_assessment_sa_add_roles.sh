@@ -3,7 +3,7 @@ export PROJECT_ID=$1;
 
 if [ -z "$PROJECT_ID" ]; then
   echo "Error: Please provide a project ID as a command-line argument."
-  echo "Ex: ./axmos_sa_add_roles.sh prj-one-prd"
+  echo "Ex: ./full_assessment_sa_add_roles.sh prj-one-prd"
   exit 1
 fi
 
@@ -12,7 +12,9 @@ ORG_ID="$(gcloud projects get-ancestors $PROJECT_ID --format=json | jq -r '.[]|s
 
 echo "==========================================================================================="
 echo ""
-echo "IMPORTANT: Please copy this Organization ID and send it to AXIOS throw the Enrollment Form"
+echo "IMPORTANT: Please copy this Organization ID and send it to AXMOS throw the Enrollment Form"
+echo ""
+echo "https://docs.google.com/forms/d/e/1FAIpQLSfUkDNQkSFr5hYlysSp202qpmcBEgg1-MC1sZavuuq9K5HG6Q/viewform"
 echo ""
 echo "Org Id: "$ORG_ID;
 echo ""
