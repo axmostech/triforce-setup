@@ -14,7 +14,7 @@ echo "==========================================================================
 echo ""
 echo "IMPORTANT: Please copy this Organization ID and send it to AXMOS throw the Enrollment Form"
 echo ""
-echo "https://docs.google.com/forms/d/1LMgtz8XBHycoJr7wKjDeVnGaE9EWGjdO6aljWCTsnVg/edit"
+echo "https://docs.google.com/forms/d/e/1FAIpQLScOPQYojW6ybB6OWyu6HhEE73K2qGEM2S7RlQhHjnRoX7FROQ/viewform"
 echo ""
 echo "Org Id: "$ORG_ID;
 echo ""
