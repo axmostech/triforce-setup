@@ -56,7 +56,7 @@ do
   gcloud iam service-accounts add-iam-policy-binding $SA_NAME \
     --member=serviceAccount:$SA_NAME \
     --role="$role" \
-    --project=$PROJECT_ID
+    --project=$PROJECT_ID \
     --no-user-output-enabled --quiet
 done
 
