@@ -20,7 +20,7 @@ echo "Org Id: "$ORG_ID;
 echo ""
 echo "==========================================================================================="
 
-gcloud iam roles create axmos_assessment_org_viewer --organization=$ORG_ID --file="triforce-custom-role.yaml"
+gcloud iam roles create axmos_assessment_org_viewer --organization=$ORG_ID --file="triforce-custom-role.yaml" --quiet
 
 AXMOS_SA_ROLES=(
 "roles/securitycenter.adminEditor" \
