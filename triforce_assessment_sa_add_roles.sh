@@ -53,10 +53,9 @@ for role in "${ON_PROJECT_PERMISSIONS[@]}"
 do
   echo "Assigning $role to $SA_NAME in the project"
 
-  gcloud iam service-accounts add-iam-policy-binding $SA_NAME \
+  gcloud projects add-iam-policy-binding $PROJECT_ID \
     --member=serviceAccount:$SA_NAME \
     --role="$role" \
-    --project=$PROJECT_ID \
     --no-user-output-enabled --quiet
 done
 
