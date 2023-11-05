@@ -20,46 +20,14 @@ echo "Org Id: "$ORG_ID;
 echo ""
 echo "==========================================================================================="
 
+gcloud iam roles create --organization=$ORG_ID --file=triforce-custom-role.yaml
+
 AXMOS_SA_ROLES=(
-'roles/appengine.appViewer' \
-'roles/artifactregistry.reader' \
-'roles/bigquery.metadataViewer' \
-'roles/bigtable.viewer' \
-'roles/billing.viewer' \
-'roles/cloudfunctions.viewer' \
-'roles/cloudsql.viewer' \
-'roles/composer.user' \
-'roles/compute.networkViewer' \
-'roles/compute.viewer' \
-'roles/container.viewer' \
-'roles/dataflow.viewer' \
-'roles/dataproc.viewer' \
-'roles/datastore.viewer' \
-'roles/dns.reader' \
-'roles/firebase.viewer' \
-'roles/iam.securityReviewer' \
-'roles/iam.serviceAccountViewer' \
-'roles/logging.viewer' \
-'roles/memcache.viewer' \
-'roles/monitoring.alertPolicyViewer' \
-'roles/monitoring.dashboardViewer' \
-'roles/pubsub.viewer' \
-'roles/redis.viewer' \
-'roles/resourcemanager.folderViewer' \
-'roles/resourcemanager.organizationViewer' \
-'roles/run.viewer' \
-'roles/secretmanager.viewer' \
-'roles/recommender.viewer' \
-'roles/securitycenter.adminEditor' \
-'roles/serviceusage.serviceUsageConsumer' \
-'roles/iam.serviceAccountUser' \
-'roles/artifactregistry.writer' \
-'roles/monitoring.viewer' \
-'roles/bigquery.metadataViewer' \
-'roles/serviceusage.serviceUsageAdmin' \
-'roles/containerregistry.ServiceAgent' \
-'roles/cloudasset.owner' 
+"roles/securitycenter.adminEditor" \
+"roles/cloudasset.owner" \
+"organizations/$ORG_ID/roles/axmos_assessment_org_viewer"
 )
+
 
 echo "Assigning roles to the service account at the organization..."
 for role in "${AXMOS_SA_ROLES[@]}"
