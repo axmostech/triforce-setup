@@ -59,5 +59,13 @@ do
     --no-user-output-enabled --quiet
 done
 
+echo "Insert Billing Export Dataset"
+bq ls --format=pretty
+read -p "Selected Dataset Dataset name: " DATASET
+BILLING_TABLE=$PROJECT_ID.$DATASET.$(bq ls $DATASET | grep -o 'gcp_billing_export_v1_[0-9A-F_]*' | head -n 1)
+
+
+
+
 
 echo "Script completed successfully."
