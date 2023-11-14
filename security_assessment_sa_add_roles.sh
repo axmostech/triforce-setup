@@ -2,13 +2,14 @@
 
 set -e
 
-# Este script:
-# a) Require de un project_id valido en GCP
-# b) A partir del project id, obtiene el ID de la organizacion, lo guarda como ORG_ID
-# c) Dentro de la organización asigna todos los roles en el array $AXMOS_SA_ROLES al Cloud AIM user $SA_NAME
-# d) Dentro del proyecto asigna todos los roles en el array $ON_PROJECT_PERMISSIONS al Cloud AIM user $SA_NAME
-# ATENCION: Este script parece estar en desuso y haber sido sobresedido por el script `triforce_assessment_sa_add_roles.sh`
-
+#
+# Attention: This script seems obsolete and superseded by script `triforce_assessment_sa_add_roles.sh` in this sasme directory
+# This script
+# a) Requires a project id valid within GCP. It should be the billing project in the target organization
+# b) Based on the project id, it obtains the organization id, saving it under under $ORG_ID
+# c) Within the organization it assigns all the roles in the array $AXMOS_SA_ROLES to the AIM user identifier by $SA_NAME
+# d) Within the billing project, it assigns all the roles in the array $ON_PROJECT_PERMISSIONS to the AIM user $SA_NAME
+#
 SA_NAME=organization-scanner@axmos-triforce-assessment.iam.gserviceaccount.com;
 PROJECT_ID=$1;
 

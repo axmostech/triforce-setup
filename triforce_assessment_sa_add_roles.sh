@@ -2,14 +2,14 @@
 
 set -e
 
-# Este script:
-# a) Require de un project_id válido en GCP
-# b) A partir del project id, obtiene el ID de la organizacion, lo guarda como ORG_ID
-# c) Dentro de la organización, crea un rol, llamado `axmos_assessment_org_viewer`  con todos los permisos listados en `triforce-custom-role.yaml`
-# d) Dentro de la organización asigna todos los roles en el array $AXMOS_SA_ROLES al Cloud AIM user $SA_NAME
-# e) Dentro del proyecto asigna todos los roles en el array $ON_PROJECT_PERMISSIONS al Cloud AIM user $SA_NAME
-# f) Luego declara en $BILLING_TABLE la tabla de bigquery que se usa para exportar los gastos del cliente
-# g) Finalmente, invita al usuario a ingresar la información al formulario web de Triforce
+# This script
+# a) Requires a project id valid within GCP. It should be the billing project in the target organization
+# b) Based on the project id, it obtains the organization id, saving it under under $ORG_ID
+# c) Within the target organization, it creates a role named `axmos_assessment_org_viewer` with all the permisions listed in `triforce-custom-role.yaml`
+# d) Within the organization it assigns all the roles in the array $AXMOS_SA_ROLES to the AIM user identifier by $SA_NAME
+# e) Within the billing project, it assigns all the roles in the array $ON_PROJECT_PERMISSIONS to the AIM user $SA_NAME
+# f) Declares under $BILLING_TABLE the BigQuery table used to export the organization costs (their billing table)
+# g) Finally, it prints out $ORG_ID and $BILLING_TABLE inviting the user to fill in this info in the Triforce onboarding form
 
 SA_NAME=organization-scanner@axmos-triforce-assessment.iam.gserviceaccount.com;
 PROJECT_ID=$1;
