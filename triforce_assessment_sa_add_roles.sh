@@ -60,11 +60,15 @@ do
     --role="${role}" \
     --no-user-output-enabled --quiet
 done
+echo "Looking for Billing Export Tables..."
 
-echo "Insert Billing Export Dataset"
-bq ls --format=pretty
-read -p "Selected Dataset Dataset name: " DATASET
-BILLING_TABLE=$PROJECT_ID.$DATASET.$(bq ls $DATASET | grep -o 'gcp_billing_export_v1_[0-9A-F_]*' | head -n 1)
+for ds in $(bq ls --format=pretty | grep -o '[^| ]\+\(\+[^| ]\+\)*' | tail -n +3)
+do
+    for table in $(bq ls $ds | grep -o 'gcp_billing_export_v1_[0-9A-F_]*')
+    do
+        BILLING_TABLES="$BILLING_TABLES \n $PROJECT_ID.$ds.$table"
+    done
+done
 
 echo "==========================================================================================="
 echo ""
@@ -72,8 +76,10 @@ echo "IMPORTANT: Please copy the required information and send it to AXMOS throu
 echo ""
 echo "https://docs.google.com/forms/d/e/1FAIpQLSfUkDNQkSFr5hYlysSp202qpmcBEgg1-MC1sZavuuq9K5HG6Q/viewform"
 echo ""
+echo "Project ID: ${PROJECT_ID}";
 echo "Organization ID: ${ORG_ID}";
-echo "Billing Export Tables List: ${BILLING_TABLE}"
+echo "Billing Export Tables List: "
+echo -e $BILLING_TABLES
 echo ""
 echo "==========================================================================================="
 
