@@ -28,6 +28,7 @@ gcloud iam roles create axmos_assessment_org_viewer --organization=$ORG_ID --fil
 AXMOS_SA_ROLES=(
  roles/securitycenter.adminEditor \
  roles/cloudasset.owner \
+ roles/serviceusage.serviceUsageAdmin \
  organizations/$ORG_ID/roles/axmos_assessment_org_viewer
 )
 
