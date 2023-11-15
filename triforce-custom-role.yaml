@@ -2,6 +2,7 @@ title: Axmos Triforce Organization Viewer
 description: Read-only permissions for the Axmos service account within the organization
 stage: BETA
 includedPermissions:
+- servicemanagement.services.bind
 - appengine.applications.get
 - appengine.instances.get
 - appengine.instances.list
@@ -965,5 +966,4 @@ includedPermissions:
 - cloudsecurityscanner.scans.create
 - cloudsecurityscanner.scans.run
 - cloudsecurityscanner.scans.get
-
 - iam.serviceAccounts.actAs
