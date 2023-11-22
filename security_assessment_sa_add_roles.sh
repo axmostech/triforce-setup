@@ -69,8 +69,9 @@ roles/bigquery.metadataViewer \
 roles/serviceusage.serviceUsageAdmin \
 roles/containerregistry.ServiceAgent
 )
-
 echo "Assigning roles to the service account at the organization..."
+echo "==========================================================================================="
+
 for role in "${AXMOS_SA_ROLES[@]}"
 do
   echo "Assigning $role... to ${SA_NAME} at the organization";
@@ -86,15 +87,19 @@ ON_PROJECT_PERMISSIONS=(
   roles/bigquery.user
 )
 
+echo "==========================================================================================="
 echo "Assigning roles to the service account in the project..."
+echo "==========================================================================================="
+
 for role in "${ON_PROJECT_PERMISSIONS[@]}"
 do
   echo "Assigning ${role} to ${SA_NAME} in the project"
-
-  gcloud iam service-accounts add-iam-policy-binding "${SA_NAME}" \
-    --member=serviceAccount:"${SA_NAME}" \
+  
+  gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
+    --member="serviceAccount:${SA_NAME}" \
     --role="${role}" \
     --no-user-output-enabled --quiet
+  
 done
 
 
