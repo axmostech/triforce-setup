@@ -45,7 +45,7 @@ done
 ON_PROJECT_PERMISSIONS=(
   # roles/run.admin \
   # roles/cloudbuild.builds.editor \
-  roles/storage.admin \
+  # roles/storage.admin \
   roles/bigquery.jobUser \
   roles/bigquery.dataOwner \
   roles/bigquery.user
@@ -63,7 +63,7 @@ do
 done
 echo "Looking for Billing Export Tables..."
 
-for ds in $(bq ls --format=pretty | grep -o '[^| ]\+\(\+[^| ]\+\)*' | tail -n +3)
+for ds in $(bq ls --format=pretty --project_id=$PROJECT_ID | grep -o '[^| ]\+\(\+[^| ]\+\)*' | tail -n +3)
 do
     for table in $(bq ls $ds | grep -o 'gcp_billing_export_v1_[0-9A-F_]*')
     do
