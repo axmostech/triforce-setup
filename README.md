@@ -24,8 +24,8 @@ Please ensure that the executing user has these permissions in the Google Cloud 
 
 ## Usage
 
-To use this script, run it in your terminal with the email of the service account and the project ID as arguments:
+To use this script, run it in your terminal with the billing project ID as argument:
 
 ```bash
-./full_assessment_sa_add_roles.sh <project_id>
+./triforce_assessment_sa_add_roles.sh <project_id>
 ```

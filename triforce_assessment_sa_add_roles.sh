@@ -26,9 +26,7 @@ ORG_ID="$(gcloud projects get-ancestors $PROJECT_ID --format=json | jq -r '.[]|s
 gcloud iam roles create axmos_assessment_org_viewer --organization=$ORG_ID --file="triforce-custom-role.yaml" --quiet
 
 AXMOS_SA_ROLES=(
-#  roles/securitycenter.adminEditor \
-#  roles/cloudasset.owner \
- roles/serviceusage.serviceUsageAdmin \
+ roles/iam.securityReviewer \
  organizations/$ORG_ID/roles/axmos_assessment_org_viewer
 )
 
@@ -43,9 +41,6 @@ do
 done
 
 ON_PROJECT_PERMISSIONS=(
-  # roles/run.admin \
-  # roles/cloudbuild.builds.editor \
-  # roles/storage.admin \
   roles/bigquery.jobUser \
   roles/bigquery.dataOwner \
   roles/bigquery.user
