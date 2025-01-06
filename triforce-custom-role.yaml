@@ -967,3 +967,4 @@ includedPermissions:
 - cloudsecurityscanner.scans.run
 - cloudsecurityscanner.scans.get
 - iam.serviceAccounts.actAs
+- apikeys.keys.get

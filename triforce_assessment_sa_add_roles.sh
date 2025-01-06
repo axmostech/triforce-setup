@@ -60,7 +60,7 @@ echo "Looking for Billing Export Tables..."
 
 for ds in $(bq ls --format=pretty --project_id=$PROJECT_ID | grep -o '[^| ]\+\(\+[^| ]\+\)*' | tail -n +3)
 do
-    for table in $(bq ls $ds | grep -o 'gcp_billing_export_v1_[0-9A-F_]*')
+    for table in $(bq ls  --project_id=$PROJECT_ID $ds | grep -o 'gcp_billing_export[_a-zA-Z0-9]*')
     do
         BILLING_TABLES="$BILLING_TABLES \n $PROJECT_ID.$ds.$table"
     done
